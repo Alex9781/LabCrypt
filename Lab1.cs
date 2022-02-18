@@ -21,9 +21,8 @@ namespace LabCrypt
         }
 
         private EncMethod encMethod = EncMethod.Atbash;
-        private Color defaultColor = Color.White;
 
-        private string alph = "абвгдежзийклмнопрстуфхцчшщъыьэюя—,?.";
+        private readonly string alph = "абвгдежзийклмнопрстуфхцчшщъыьэюя—,?.";
 
         public Lab1()
         {
@@ -35,7 +34,6 @@ namespace LabCrypt
             UpdateForm();
 
             this.FormClosing += new FormClosingEventHandler(Program.ApplicationExit);
-            defaultColor = Atbash_btn.BackColor;
         }
 
         public void UpdateForm()
@@ -145,7 +143,7 @@ namespace LabCrypt
         {
             foreach (char c in Program.InputText.ToLower())
             {
-                if (alph.IndexOf(c) == -1)
+                if (!alph.Contains(c))
                 {
                     Program.OutputText += c;
                     continue;
@@ -164,7 +162,7 @@ namespace LabCrypt
 
             foreach (char c in Program.InputText.ToLower())
             {
-                if (alph.IndexOf(c) == -1)
+                if (!alph.Contains(c))
                 {
                     Program.OutputText += c;
                     continue;

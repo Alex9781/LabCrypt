@@ -1,11 +1,10 @@
-#pragma warning disable CS8622 
 namespace LabCrypt
 {
     internal static class Program
     {
         public static string InputText = "";
         public static string OutputText = "";
-        public static List<Form> Forms = new List<Form>();
+        public static List<Form> Forms = new();
 
         /// <summary>
         ///  The main entry point for the application.
