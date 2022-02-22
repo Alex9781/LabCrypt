@@ -59,5 +59,23 @@ namespace LabCrypt
             this.InputTextBox.Text = Program.InputText;
             this.OutputTextBox.Text = Program.OutputText;
         }
+
+        private void Lab2_btn_Click(object sender, EventArgs e)
+        {
+            if (Program.Forms.FindIndex(form => form.GetType() == typeof(Lab2)) == -1)
+            {
+                Lab2 lab2 = new();
+                lab2.UpdateForm();
+                lab2.Show();
+            }
+            else
+            {
+                Lab2 lab2 = (Lab2)Program.Forms[1];
+                lab2.UpdateForm();
+                lab2.Show();
+            }
+
+            this.Hide();
+        }
     }
 }

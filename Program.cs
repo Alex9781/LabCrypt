@@ -47,6 +47,6 @@ namespace LabCrypt
             var a = Program.InputText;
             Program.InputText = Program.OutputText;
             Program.OutputText = a;
-        } 
+        }
     }
 }

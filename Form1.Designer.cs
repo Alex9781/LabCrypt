@@ -34,6 +34,7 @@
             this.SelectFile_btn = new System.Windows.Forms.Button();
             this.Swap_btn = new System.Windows.Forms.Button();
             this.Clear_Output_btn = new System.Windows.Forms.Button();
+            this.Lab2_btn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // OutputTextBox
@@ -101,11 +102,22 @@
             this.Clear_Output_btn.UseVisualStyleBackColor = true;
             this.Clear_Output_btn.Click += new System.EventHandler(this.Clear_Output_btn_Click);
             // 
+            // Lab2_btn
+            // 
+            this.Lab2_btn.Location = new System.Drawing.Point(12, 48);
+            this.Lab2_btn.Name = "Lab2_btn";
+            this.Lab2_btn.Size = new System.Drawing.Size(80, 30);
+            this.Lab2_btn.TabIndex = 6;
+            this.Lab2_btn.Text = "Lab2";
+            this.Lab2_btn.UseVisualStyleBackColor = true;
+            this.Lab2_btn.Click += new System.EventHandler(this.Lab2_btn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1187, 634);
+            this.Controls.Add(this.Lab2_btn);
             this.Controls.Add(this.Clear_Output_btn);
             this.Controls.Add(this.Swap_btn);
             this.Controls.Add(this.SelectFile_btn);
@@ -127,5 +139,6 @@
         private Button SelectFile_btn;
         private Button Swap_btn;
         private Button Clear_Output_btn;
+        private Button Lab2_btn;
     }
 }

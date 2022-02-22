@@ -106,6 +106,7 @@
             this.keyBox.Enabled = false;
             this.keyBox.Location = new System.Drawing.Point(98, 104);
             this.keyBox.Name = "keyBox";
+            this.keyBox.PlaceholderText = "Key";
             this.keyBox.Size = new System.Drawing.Size(80, 23);
             this.keyBox.TabIndex = 6;
             // 

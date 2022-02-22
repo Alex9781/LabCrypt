@@ -1,14 +1,4 @@
 ﻿#pragma warning disable CS8622 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
 namespace LabCrypt
 {
     public partial class Lab1 : Form
@@ -179,7 +169,7 @@ namespace LabCrypt
 
             for (int i = 0; i < openCopy.Length - 1; i++)
             {
-                openCopyInt[i] = (Int32.Parse(openCopy[i]));
+                _ = int.TryParse(openCopy[i], out openCopyInt[i]);
             }
 
             foreach (int c in openCopyInt)
