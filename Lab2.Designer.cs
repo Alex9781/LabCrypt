@@ -60,6 +60,7 @@
             this.InputTextBox.Name = "InputTextBox";
             this.InputTextBox.Size = new System.Drawing.Size(350, 614);
             this.InputTextBox.TabIndex = 3;
+            this.InputTextBox.TextChanged += new System.EventHandler(this.InputTextBox_TextChanged);
             // 
             // MainPage_btn
             // 

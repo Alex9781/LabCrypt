@@ -32,6 +32,12 @@ namespace LabCrypt
             this.OutputTextBox.Text = Program.OutputText;
         }
 
+        private void InputTextBox_TextChanged(object sender, EventArgs e)
+        {
+            this.InputTextBox.Text = Program.InputText;
+            this.OutputTextBox.Text = Program.OutputText;
+        }
+
         private void MainPage_btn_Click(object sender, EventArgs e)
         {
             Form1 form1 = (Form1)Program.Forms[0];

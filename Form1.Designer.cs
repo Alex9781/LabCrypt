@@ -35,6 +35,7 @@
             this.Swap_btn = new System.Windows.Forms.Button();
             this.Clear_Output_btn = new System.Windows.Forms.Button();
             this.Lab2_btn = new System.Windows.Forms.Button();
+            this.Lab3_btn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // OutputTextBox
@@ -112,11 +113,22 @@
             this.Lab2_btn.UseVisualStyleBackColor = true;
             this.Lab2_btn.Click += new System.EventHandler(this.Lab2_btn_Click);
             // 
+            // Lab3_btn
+            // 
+            this.Lab3_btn.Location = new System.Drawing.Point(12, 84);
+            this.Lab3_btn.Name = "Lab3_btn";
+            this.Lab3_btn.Size = new System.Drawing.Size(80, 30);
+            this.Lab3_btn.TabIndex = 7;
+            this.Lab3_btn.Text = "Lab3";
+            this.Lab3_btn.UseVisualStyleBackColor = true;
+            this.Lab3_btn.Click += new System.EventHandler(this.Lab3_btn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1187, 634);
+            this.Controls.Add(this.Lab3_btn);
             this.Controls.Add(this.Lab2_btn);
             this.Controls.Add(this.Clear_Output_btn);
             this.Controls.Add(this.Swap_btn);
@@ -140,5 +152,6 @@
         private Button Swap_btn;
         private Button Clear_Output_btn;
         private Button Lab2_btn;
+        private Button Lab3_btn;
     }
 }

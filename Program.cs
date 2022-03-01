@@ -4,7 +4,7 @@ namespace LabCrypt
     {
         public static string InputText = "";
         public static string OutputText = "";
-        public static List<Form> Forms = new();
+        public static List<Form> Forms = new(20);
 
         /// <summary>
         ///  The main entry point for the application.
@@ -44,9 +44,7 @@ namespace LabCrypt
 
         public static void SwapText()
         {
-            var a = Program.InputText;
-            Program.InputText = Program.OutputText;
-            Program.OutputText = a;
+            (Program.OutputText, Program.InputText) = (Program.InputText, Program.OutputText);
         }
     }
 }
