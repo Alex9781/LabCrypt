@@ -95,5 +95,23 @@ namespace LabCrypt
 
             this.Hide();
         }
+
+        private void Lab4_btn_Click(object sender, EventArgs e)
+        {
+            if (Program.Forms.FindIndex(form => form.GetType() == typeof(Lab4)) == -1)
+            {
+                Lab4 lab4 = new();
+                lab4.UpdateForm();
+                lab4.Show();
+            }
+            else
+            {
+                Lab4 lab4 = Program.Forms.OfType<Lab4>().First();
+                lab4.UpdateForm();
+                lab4.Show();
+            }
+
+            this.Hide();
+        }
     }
 }

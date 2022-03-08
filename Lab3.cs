@@ -129,7 +129,7 @@ namespace LabCrypt
         private void PlayfairEncrypt()
         {
             string open = Program.InputText.ToLower();
-            List<char[]> key = new List<char[]>(5);
+            List<char[]> key = new(5);
             for (int i = 0; i < 5; i++) key.Add(new char[6]);
             List<char> inputKey = new(this.keyBox.Text);
             List<char> alphCopy = new(alph);
@@ -236,7 +236,7 @@ namespace LabCrypt
         private void PlayfairDecrypt()
         {
             string open = Program.InputText.ToLower();
-            List<char[]> key = new List<char[]>(5);
+            List<char[]> key = new(5);
             for (int i = 0; i < 5; i++) key.Add(new char[8]);
             List<char> inputKey = new(this.keyBox.Text);
             List<char> alphCopy = new(alph);
