@@ -37,6 +37,7 @@
             this.Lab2_btn = new System.Windows.Forms.Button();
             this.Lab3_btn = new System.Windows.Forms.Button();
             this.Lab4_btn = new System.Windows.Forms.Button();
+            this.Lab5_btn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // OutputTextBox
@@ -124,21 +125,32 @@
             this.Lab3_btn.UseVisualStyleBackColor = true;
             this.Lab3_btn.Click += new System.EventHandler(this.Lab3_btn_Click);
             // 
-            // Lab_4_btn
+            // Lab4_btn
             // 
             this.Lab4_btn.Location = new System.Drawing.Point(12, 120);
-            this.Lab4_btn.Name = "Lab_4_btn";
+            this.Lab4_btn.Name = "Lab4_btn";
             this.Lab4_btn.Size = new System.Drawing.Size(80, 30);
             this.Lab4_btn.TabIndex = 8;
             this.Lab4_btn.Text = "Lab4";
             this.Lab4_btn.UseVisualStyleBackColor = true;
             this.Lab4_btn.Click += new System.EventHandler(this.Lab4_btn_Click);
             // 
+            // Lab5_btn
+            // 
+            this.Lab5_btn.Location = new System.Drawing.Point(12, 156);
+            this.Lab5_btn.Name = "Lab5_btn";
+            this.Lab5_btn.Size = new System.Drawing.Size(80, 30);
+            this.Lab5_btn.TabIndex = 9;
+            this.Lab5_btn.Text = "Lab5";
+            this.Lab5_btn.UseVisualStyleBackColor = true;
+            this.Lab5_btn.Click += new System.EventHandler(this.Lab5_btn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1187, 634);
+            this.Controls.Add(this.Lab5_btn);
             this.Controls.Add(this.Lab4_btn);
             this.Controls.Add(this.Lab3_btn);
             this.Controls.Add(this.Lab2_btn);
@@ -166,5 +178,6 @@
         private Button Lab2_btn;
         private Button Lab3_btn;
         private Button Lab4_btn;
+        private Button Lab5_btn;
     }
 }

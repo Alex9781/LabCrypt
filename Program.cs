@@ -47,4 +47,9 @@ namespace LabCrypt
             (Program.OutputText, Program.InputText) = (Program.InputText, Program.OutputText);
         }
     }
+
+    public interface IMyForm
+    {
+        void UpdateForm();       
+    }
 }

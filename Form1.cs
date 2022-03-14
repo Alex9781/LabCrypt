@@ -44,71 +44,42 @@ namespace LabCrypt
 
         private void Lab1_btn_Click(object sender, EventArgs e)
         {
-            if (Program.Forms.FindIndex(form => form.GetType() == typeof(Lab1)) == -1)
-            {
-                Lab1 lab1 = new();
-                lab1.UpdateForm();
-                lab1.Show();
-            }
-            else 
-            {
-                Lab1 lab1 = Program.Forms.OfType<Lab1>().First();
-                lab1.UpdateForm();
-                lab1.Show();
-            }
-
-            this.Hide();
+            RenderLab<Lab1>();
         }
 
         private void Lab2_btn_Click(object sender, EventArgs e)
         {
-            if (Program.Forms.FindIndex(form => form.GetType() == typeof(Lab2)) == -1)
-            {
-                Lab2 lab2 = new();
-                lab2.UpdateForm();
-                lab2.Show();
-            }
-            else
-            {
-                Lab2 lab2 = Program.Forms.OfType<Lab2>().First();
-                lab2.UpdateForm();
-                lab2.Show();
-            }
-
-            this.Hide();
+            RenderLab<Lab2>();
         }
 
         private void Lab3_btn_Click(object sender, EventArgs e)
         {
-            if (Program.Forms.FindIndex(form => form.GetType() == typeof(Lab3)) == -1)
-            {
-                Lab3 lab3 = new();
-                lab3.UpdateForm();
-                lab3.Show();
-            }
-            else
-            {
-                Lab3 lab3 = Program.Forms.OfType<Lab3>().First();
-                lab3.UpdateForm();
-                lab3.Show();
-            }
-
-            this.Hide();
+            RenderLab<Lab3>();
         }
 
         private void Lab4_btn_Click(object sender, EventArgs e)
         {
-            if (Program.Forms.FindIndex(form => form.GetType() == typeof(Lab4)) == -1)
+            RenderLab<Lab4>();
+        }
+
+        private void Lab5_btn_Click(object sender, EventArgs e)
+        {
+            RenderLab<Lab5>();
+        }
+
+        private void RenderLab<T>() where T : Form, IMyForm, new()
+        {
+            if (Program.Forms.FindIndex(form => form.GetType() == typeof(T)) == -1)
             {
-                Lab4 lab4 = new();
-                lab4.UpdateForm();
-                lab4.Show();
+                T lab = new();
+                lab.UpdateForm();
+                lab.Show();
             }
             else
             {
-                Lab4 lab4 = Program.Forms.OfType<Lab4>().First();
-                lab4.UpdateForm();
-                lab4.Show();
+                T lab = Program.Forms.OfType<T>().First();
+                lab.UpdateForm();
+                lab.Show();
             }
 
             this.Hide();

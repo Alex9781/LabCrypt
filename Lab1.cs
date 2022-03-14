@@ -1,7 +1,7 @@
 ﻿#pragma warning disable CS8622 
 namespace LabCrypt
 {
-    public partial class Lab1 : Form
+    public partial class Lab1 : Form, IMyForm
     {
         private enum EncMethod
         {

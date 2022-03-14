@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LabCrypt
 {
-    public partial class Lab4 : Form
+    public partial class Lab4 : Form, IMyForm
     {
         private enum EncMethod
         {
@@ -43,8 +43,7 @@ namespace LabCrypt
 
         private void InputTextBox_TextChanged(object sender, EventArgs e)
         {
-            this.InputTextBox.Text = Program.InputText;
-            this.OutputTextBox.Text = Program.OutputText;
+            Program.InputText = this.InputTextBox.Text;
         }
 
         private void MainPage_btn_Click(object sender, EventArgs e)
