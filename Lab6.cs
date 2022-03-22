@@ -93,7 +93,19 @@ namespace LabCrypt
 
         private void A51Encrypt()
         {
-            string strCommandParameters = $"-u C:/Users/alexz/Desktop/Univer/2.2/Крипта/LabCrypt/Py/a51.py {Program.InputText} {this.keyBox.Text} {this.ivBox.Text} 1";
+            string input = Program.InputText.ToLower();
+            string formatedInput = "";
+
+            foreach (char c in input)
+            {
+                if (c == ' ' || c == '\n' || c == '\r') continue;
+                formatedInput += c;
+            }
+
+            string strCommandParameters = $"-u C:/Users/alexz/Desktop/Univer/2.2/Крипта/LabCrypt/Py/a51.py " +
+                $"{this.keyBox.Text} " +
+                $"{this.ivBox.Text} 1 " +
+                $"{formatedInput}";
 
             var process = new Process
             {
@@ -120,7 +132,19 @@ namespace LabCrypt
 
         private void A52Encrypt()
         {
-            string strCommandParameters = $"-u C:/Users/alexz/Desktop/Univer/2.2/Крипта/LabCrypt/Py/a52.py {Program.InputText} {this.keyBox.Text} {this.ivBox.Text} 1";
+            string input = Program.InputText.ToLower();
+            string formatedInput = "";
+
+            foreach (char c in input)
+            {
+                if (c == ' ' || c == '\n' || c == '\r') continue;
+                formatedInput += c;
+            }
+
+            string strCommandParameters = $"-u C:/Users/alexz/Desktop/Univer/2.2/Крипта/LabCrypt/Py/a52.py " +
+                $"{this.keyBox.Text} " +
+                $"{this.ivBox.Text} 1 " +
+                $"{formatedInput}";
 
             var process = new Process
             {
@@ -147,7 +171,10 @@ namespace LabCrypt
 
         private void A51Decrypt()
         {
-            string strCommandParameters = $"-u C:/Users/alexz/Desktop/Univer/2.2/Крипта/LabCrypt/Py/a51.py {Program.InputText} {this.keyBox.Text} {this.ivBox.Text} 0";
+            string strCommandParameters = $"-u C:/Users/alexz/Desktop/Univer/2.2/Крипта/LabCrypt/Py/a51.py " +
+                $"{this.keyBox.Text} " +
+                $"{this.ivBox.Text} 0 " +
+                $"{Program.InputText}";
 
             var process = new Process
             {
@@ -174,7 +201,10 @@ namespace LabCrypt
 
         private void A52Decrypt()
         {
-            string strCommandParameters = $"-u C:/Users/alexz/Desktop/Univer/2.2/Крипта/LabCrypt/Py/a52.py {Program.InputText} {this.keyBox.Text} {this.ivBox.Text} 0";
+            string strCommandParameters = $"-u C:/Users/alexz/Desktop/Univer/2.2/Крипта/LabCrypt/Py/a52.py " +
+                $"{this.keyBox.Text} " +
+                $"{this.ivBox.Text} 0 " +
+                $"{Program.InputText}";
 
             var process = new Process
             {
