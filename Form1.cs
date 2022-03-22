@@ -67,6 +67,11 @@ namespace LabCrypt
             RenderLab<Lab5>();
         }
 
+        private void Lab6_btn_Click(object sender, EventArgs e)
+        {
+            RenderLab<Lab6>();
+        }
+
         private void RenderLab<T>() where T : Form, IMyForm, new()
         {
             if (Program.Forms.FindIndex(form => form.GetType() == typeof(T)) == -1)

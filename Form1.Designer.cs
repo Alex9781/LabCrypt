@@ -38,6 +38,7 @@
             this.Lab3_btn = new System.Windows.Forms.Button();
             this.Lab4_btn = new System.Windows.Forms.Button();
             this.Lab5_btn = new System.Windows.Forms.Button();
+            this.Lab6_btn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // OutputTextBox
@@ -145,11 +146,22 @@
             this.Lab5_btn.UseVisualStyleBackColor = true;
             this.Lab5_btn.Click += new System.EventHandler(this.Lab5_btn_Click);
             // 
+            // Lab6_btn
+            // 
+            this.Lab6_btn.Location = new System.Drawing.Point(12, 192);
+            this.Lab6_btn.Name = "Lab6_btn";
+            this.Lab6_btn.Size = new System.Drawing.Size(80, 30);
+            this.Lab6_btn.TabIndex = 10;
+            this.Lab6_btn.Text = "Lab6";
+            this.Lab6_btn.UseVisualStyleBackColor = true;
+            this.Lab6_btn.Click += new System.EventHandler(this.Lab6_btn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1187, 634);
+            this.Controls.Add(this.Lab6_btn);
             this.Controls.Add(this.Lab5_btn);
             this.Controls.Add(this.Lab4_btn);
             this.Controls.Add(this.Lab3_btn);
@@ -179,5 +191,6 @@
         private Button Lab3_btn;
         private Button Lab4_btn;
         private Button Lab5_btn;
+        private Button Lab6_btn;
     }
 }
