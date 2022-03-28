@@ -57,7 +57,7 @@ def load(iv, secret):
             temp2[0] = x_bit
             r2 = temp2
         if r4[7] == majority:
-            x_bit = r3[20] ^ r3[21] ^ r3[22]
+            x_bit = r3[20] ^ r3[21] ^ r3[22] ^ r3[7]
             temp3 = np.roll(r3, 1)
             temp3[0] = x_bit
             r3 = temp3
@@ -90,7 +90,7 @@ def a_gamma(iv, secret, steps):
             temp2[0] = x_bit
             r2 = temp2
         if r4[7] == majority:
-            x_bit = r3[20] ^ r3[21] ^ r3[22]
+            x_bit = r3[20] ^ r3[21] ^ r3[22] ^ r3[7]
             temp3 = np.roll(r3, 1)
             temp3[0] = x_bit
             r3 = temp3
@@ -190,6 +190,11 @@ key = sys.argv[1]
 iv = int(sys.argv[2])
 isEncrypt = bool(int(sys.argv[3]))
 inputStr = sys.argv[4]
+
+# key = "кря"
+# iv = 123
+# isEncrypt = 1
+# inputStr = "каждаяка"
 
 if isEncrypt:
     print(encryptmessage(inputStr, key, iv))
