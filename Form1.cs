@@ -42,6 +42,24 @@ namespace LabCrypt
             this.OutputTextBox.Text = Program.OutputText;
         }
 
+        private void RenderLab<T>() where T : Form, IMyForm, new()
+        {
+            if (Program.Forms.FindIndex(form => form.GetType() == typeof(T)) == -1)
+            {
+                T lab = new();
+                lab.UpdateForm();
+                lab.Show();
+            }
+            else
+            {
+                T lab = Program.Forms.OfType<T>().First();
+                lab.UpdateForm();
+                lab.Show();
+            }
+
+            this.Hide();
+        }
+
         private void Lab1_btn_Click(object sender, EventArgs e)
         {
             RenderLab<Lab1>();
@@ -77,23 +95,9 @@ namespace LabCrypt
             RenderLab<Lab7>();
         }
 
-        private void RenderLab<T>() where T : Form, IMyForm, new()
+        private void Lab8_btn_Click(object sender, EventArgs e)
         {
-            if (Program.Forms.FindIndex(form => form.GetType() == typeof(T)) == -1)
-            {
-                T lab = new();
-                lab.UpdateForm();
-                lab.Show();
-            }
-            else
-            {
-                T lab = Program.Forms.OfType<T>().First();
-                lab.UpdateForm();
-                lab.Show();
-            }
-
-            this.Hide();
+            RenderLab<Lab8>();
         }
-
     }
 }

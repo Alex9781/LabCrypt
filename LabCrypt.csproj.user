@@ -25,5 +25,8 @@
     <Compile Update="Lab7.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Lab8.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>
