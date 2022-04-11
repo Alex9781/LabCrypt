@@ -37,6 +37,9 @@
             this.Shennon_btn = new System.Windows.Forms.Button();
             this.Gost_28147_btn = new System.Windows.Forms.Button();
             this.ivBox = new System.Windows.Forms.TextBox();
+            this.TBox = new System.Windows.Forms.TextBox();
+            this.aBox = new System.Windows.Forms.TextBox();
+            this.cBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // MainPage_btn
@@ -73,7 +76,7 @@
             // 
             // Encrypt_btn
             // 
-            this.Encrypt_btn.Location = new System.Drawing.Point(12, 174);
+            this.Encrypt_btn.Location = new System.Drawing.Point(12, 203);
             this.Encrypt_btn.Name = "Encrypt_btn";
             this.Encrypt_btn.Size = new System.Drawing.Size(80, 30);
             this.Encrypt_btn.TabIndex = 15;
@@ -83,7 +86,7 @@
             // 
             // Decrypt_btn
             // 
-            this.Decrypt_btn.Location = new System.Drawing.Point(156, 174);
+            this.Decrypt_btn.Location = new System.Drawing.Point(156, 203);
             this.Decrypt_btn.Name = "Decrypt_btn";
             this.Decrypt_btn.Size = new System.Drawing.Size(80, 30);
             this.Decrypt_btn.TabIndex = 16;
@@ -93,10 +96,10 @@
             // 
             // keyBox
             // 
-            this.keyBox.Location = new System.Drawing.Point(12, 117);
+            this.keyBox.Location = new System.Drawing.Point(127, 117);
             this.keyBox.Name = "keyBox";
             this.keyBox.PlaceholderText = "Key";
-            this.keyBox.Size = new System.Drawing.Size(224, 23);
+            this.keyBox.Size = new System.Drawing.Size(109, 23);
             this.keyBox.TabIndex = 17;
             // 
             // Shennon_btn
@@ -123,17 +126,44 @@
             // ivBox
             // 
             this.ivBox.Enabled = false;
-            this.ivBox.Location = new System.Drawing.Point(12, 146);
+            this.ivBox.Location = new System.Drawing.Point(127, 146);
             this.ivBox.Name = "ivBox";
             this.ivBox.PlaceholderText = "IV";
-            this.ivBox.Size = new System.Drawing.Size(224, 23);
+            this.ivBox.Size = new System.Drawing.Size(109, 23);
             this.ivBox.TabIndex = 20;
+            // 
+            // TBox
+            // 
+            this.TBox.Location = new System.Drawing.Point(12, 117);
+            this.TBox.Name = "TBox";
+            this.TBox.PlaceholderText = "T(0)";
+            this.TBox.Size = new System.Drawing.Size(109, 23);
+            this.TBox.TabIndex = 21;
+            // 
+            // aBox
+            // 
+            this.aBox.Location = new System.Drawing.Point(12, 145);
+            this.aBox.Name = "aBox";
+            this.aBox.PlaceholderText = "a";
+            this.aBox.Size = new System.Drawing.Size(109, 23);
+            this.aBox.TabIndex = 22;
+            // 
+            // cBox
+            // 
+            this.cBox.Location = new System.Drawing.Point(12, 174);
+            this.cBox.Name = "cBox";
+            this.cBox.PlaceholderText = "c";
+            this.cBox.Size = new System.Drawing.Size(109, 23);
+            this.cBox.TabIndex = 23;
             // 
             // Lab5
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1183, 610);
+            this.Controls.Add(this.cBox);
+            this.Controls.Add(this.aBox);
+            this.Controls.Add(this.TBox);
             this.Controls.Add(this.ivBox);
             this.Controls.Add(this.Gost_28147_btn);
             this.Controls.Add(this.Shennon_btn);
@@ -161,5 +191,8 @@
         private Button Shennon_btn;
         private Button Gost_28147_btn;
         private TextBox ivBox;
+        private TextBox TBox;
+        private TextBox aBox;
+        private TextBox cBox;
     }
 }

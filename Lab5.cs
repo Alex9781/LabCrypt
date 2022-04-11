@@ -1,4 +1,5 @@
 ﻿#pragma warning disable CS8622
+#pragma warning disable CS8618
 using System.Text;
 using GOST;
 
@@ -50,7 +51,14 @@ namespace LabCrypt
         private void Shennon_btn_Click(object sender, EventArgs e)
         {
             encMethod = EncMethod.Shennon;
+
             this.ivBox.Enabled = false;
+            this.keyBox.Enabled = false;
+
+            this.TBox.Enabled = true;
+            this.aBox.Enabled = true;
+            this.cBox.Enabled = true;
+
             this.Shennon_btn.BackColor = Color.Turquoise;
             this.Gost_28147_btn.BackColor = Color.Transparent;
         }
@@ -58,7 +66,14 @@ namespace LabCrypt
         private void Gost_28147_btn_Click(object sender, EventArgs e)
         {
             encMethod = EncMethod.Gost_28147;
+
             this.ivBox.Enabled = true;
+            this.keyBox.Enabled = true;
+
+            this.TBox.Enabled = false;
+            this.aBox.Enabled = false;
+            this.cBox.Enabled = false;
+
             this.Shennon_btn.BackColor = Color.Transparent;
             this.Gost_28147_btn.BackColor = Color.Turquoise;
         }
@@ -105,17 +120,14 @@ namespace LabCrypt
                 input[i] = alph.IndexOf(Program.InputText.ToLower()[i]);
             }
 
-            int[] key = new int[Program.InputText.Length];
-            Program.OutputText = "Key: ";
-            for (int i = 0; i < key.Length; i++)
-            {
-                key[i] = new Random().Next(0, 40);
-                Program.OutputText += $"{key[i]} ";
-            }
-            Program.OutputText += "\nOutput: ";
+            List<int> key = new List<int>();
+            int a = int.Parse(this.aBox.Text);
+            int c = int.Parse(this.cBox.Text);
 
             for (int i = 0; i < input.Length; i++)
             {
+                if (i == 0) key.Add(int.Parse(this.TBox.Text));
+                else key.Add((a * key[i - 1] + c) % alph.Length);
                 input[i] = input[i] ^ key[i];
                 Program.OutputText += $"{input[i]} ";
             }
@@ -136,17 +148,22 @@ namespace LabCrypt
         private void ShennonDecrypt()
         {
             string[] inputStr = Program.InputText.ToLower().Split(" ");
-            string[] keyStr = this.keyBox.Text.Split(" ");
 
             int[] input = new int[inputStr.Length-1];
-            int[] key = new int[inputStr.Length];
+
+            List<int> key = new List<int>();
+            int a = int.Parse(this.aBox.Text);
+            int c = int.Parse(this.cBox.Text);
+
             for (int i = 0; i < input.Length; i++)
             {
                 input[i] = int.Parse(inputStr[i]);
-                key[i] = int.Parse(keyStr[i]);
+
+                if (i == 0) key.Add(int.Parse(this.TBox.Text));
+                else key.Add((a * key[i - 1] + c) % alph.Length);
 
                 input[i] = input[i] ^ key[i];
-                Program.OutputText += alph[input[i]];
+                Program.OutputText += alph[(int)input[i]];
             }
         }
 

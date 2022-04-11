@@ -1,4 +1,6 @@
-﻿using GOST.Ciphers;
+﻿#pragma warning disable CS8625
+#pragma warning disable CS8618
+using GOST.Ciphers;
 using GOST.Interfaces;
 using GOST.SBlocks;
 using GOST.Types;
@@ -197,7 +199,6 @@ namespace GOST
                 released = true;
 
                 sBlock = null;
-                message = null;
                 key = null;
                 iv = null;
                 subKeys.Clear();
