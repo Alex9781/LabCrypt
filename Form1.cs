@@ -104,5 +104,10 @@ namespace LabCrypt
         {
             RenderLab<Lab9>();
         }
+
+        private void Lab10_btn_Click(object sender, EventArgs e)
+        {
+            RenderLab<Lab10>();
+        }
     }
 }

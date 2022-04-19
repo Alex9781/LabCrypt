@@ -7,6 +7,9 @@
     <Compile Update="Lab1.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Lab10.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Lab2.cs">
       <SubType>Form</SubType>
     </Compile>

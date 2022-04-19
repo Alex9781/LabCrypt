@@ -36,6 +36,8 @@
             this.keyBox = new System.Windows.Forms.TextBox();
             this.Encrypt_btn = new System.Windows.Forms.Button();
             this.Decrypt_btn = new System.Windows.Forms.Button();
+            this.alph_Help_Label = new System.Windows.Forms.Label();
+            this.Is_Alph_Full_CheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // MainPage_btn
@@ -119,11 +121,33 @@
             this.Decrypt_btn.UseVisualStyleBackColor = true;
             this.Decrypt_btn.Click += new System.EventHandler(this.Decrypt_btn_Click);
             // 
+            // alph_Help_Label
+            // 
+            this.alph_Help_Label.AutoSize = true;
+            this.alph_Help_Label.Location = new System.Drawing.Point(12, 190);
+            this.alph_Help_Label.Name = "alph_Help_Label";
+            this.alph_Help_Label.Size = new System.Drawing.Size(434, 30);
+            this.alph_Help_Label.TabIndex = 16;
+            this.alph_Help_Label.Text = "Необходимо для сверки с карточкой\r\nЕсли не выделено, использует обрезанный алфави" +
+    "т без \"ё\" и спец. символов";
+            // 
+            // Is_Alph_Full_CheckBox
+            // 
+            this.Is_Alph_Full_CheckBox.AutoSize = true;
+            this.Is_Alph_Full_CheckBox.Location = new System.Drawing.Point(12, 168);
+            this.Is_Alph_Full_CheckBox.Name = "Is_Alph_Full_CheckBox";
+            this.Is_Alph_Full_CheckBox.Size = new System.Drawing.Size(121, 19);
+            this.Is_Alph_Full_CheckBox.TabIndex = 15;
+            this.Is_Alph_Full_CheckBox.Text = "Полный алфавит";
+            this.Is_Alph_Full_CheckBox.UseVisualStyleBackColor = true;
+            // 
             // Lab3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1197, 625);
+            this.Controls.Add(this.alph_Help_Label);
+            this.Controls.Add(this.Is_Alph_Full_CheckBox);
             this.Controls.Add(this.Decrypt_btn);
             this.Controls.Add(this.Encrypt_btn);
             this.Controls.Add(this.keyBox);
@@ -149,5 +173,7 @@
         private TextBox keyBox;
         private Button Encrypt_btn;
         private Button Decrypt_btn;
+        private Label alph_Help_Label;
+        private CheckBox Is_Alph_Full_CheckBox;
     }
 }

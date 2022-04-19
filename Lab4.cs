@@ -1,6 +1,4 @@
-﻿#pragma warning disable CS8622
-#pragma warning disable CS8618
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
 
 namespace LabCrypt
@@ -16,7 +14,7 @@ namespace LabCrypt
 
         private EncMethod encMethod = EncMethod.Vertical;
         private readonly DES DESalg;
-        private byte[] encText;
+        private byte[] encText = Array.Empty<byte>();
 
         //private readonly string alph = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя—,?.\n\r ";
         private readonly string alph = "абвгдежзиклмнопрстуфхцчшщьыэюя";

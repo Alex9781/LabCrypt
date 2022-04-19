@@ -40,6 +40,10 @@
             this.kBox = new System.Windows.Forms.TextBox();
             this.aBox = new System.Windows.Forms.TextBox();
             this.bBox = new System.Windows.Forms.TextBox();
+            this.RSA_DSA_btn = new System.Windows.Forms.Button();
+            this.qBox = new System.Windows.Forms.TextBox();
+            this.eBox = new System.Windows.Forms.TextBox();
+            this.signBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // MainPage_btn
@@ -56,7 +60,7 @@
             // 
             this.OutputTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.OutputTextBox.Location = new System.Drawing.Point(982, 12);
+            this.OutputTextBox.Location = new System.Drawing.Point(922, 12);
             this.OutputTextBox.Multiline = true;
             this.OutputTextBox.Name = "OutputTextBox";
             this.OutputTextBox.ReadOnly = true;
@@ -67,7 +71,7 @@
             // 
             this.InputTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.InputTextBox.Location = new System.Drawing.Point(626, 12);
+            this.InputTextBox.Location = new System.Drawing.Point(566, 12);
             this.InputTextBox.Multiline = true;
             this.InputTextBox.Name = "InputTextBox";
             this.InputTextBox.Size = new System.Drawing.Size(350, 615);
@@ -76,7 +80,7 @@
             // 
             // Sign_btn
             // 
-            this.Sign_btn.Location = new System.Drawing.Point(12, 274);
+            this.Sign_btn.Location = new System.Drawing.Point(12, 303);
             this.Sign_btn.Name = "Sign_btn";
             this.Sign_btn.Size = new System.Drawing.Size(80, 30);
             this.Sign_btn.TabIndex = 40;
@@ -86,7 +90,7 @@
             // 
             // Decrypt_btn
             // 
-            this.Decrypt_btn.Location = new System.Drawing.Point(156, 274);
+            this.Decrypt_btn.Location = new System.Drawing.Point(156, 303);
             this.Decrypt_btn.Name = "Decrypt_btn";
             this.Decrypt_btn.Size = new System.Drawing.Size(80, 30);
             this.Decrypt_btn.TabIndex = 41;
@@ -101,7 +105,7 @@
             this.ElgamalDSA_btn.Name = "ElgamalDSA_btn";
             this.ElgamalDSA_btn.Size = new System.Drawing.Size(80, 46);
             this.ElgamalDSA_btn.TabIndex = 42;
-            this.ElgamalDSA_btn.Text = "Elgamal DSA";
+            this.ElgamalDSA_btn.Text = "Elgamal ЭЦП";
             this.ElgamalDSA_btn.UseVisualStyleBackColor = false;
             this.ElgamalDSA_btn.Click += new System.EventHandler(this.ElgamalDSA_btn_Click);
             // 
@@ -115,7 +119,7 @@
             // 
             // gBox
             // 
-            this.gBox.Location = new System.Drawing.Point(12, 129);
+            this.gBox.Location = new System.Drawing.Point(12, 158);
             this.gBox.Name = "gBox";
             this.gBox.PlaceholderText = "g";
             this.gBox.Size = new System.Drawing.Size(224, 23);
@@ -123,7 +127,7 @@
             // 
             // xBox
             // 
-            this.xBox.Location = new System.Drawing.Point(12, 158);
+            this.xBox.Location = new System.Drawing.Point(12, 187);
             this.xBox.Name = "xBox";
             this.xBox.PlaceholderText = "x";
             this.xBox.Size = new System.Drawing.Size(224, 23);
@@ -131,7 +135,7 @@
             // 
             // kBox
             // 
-            this.kBox.Location = new System.Drawing.Point(12, 187);
+            this.kBox.Location = new System.Drawing.Point(12, 216);
             this.kBox.Name = "kBox";
             this.kBox.PlaceholderText = "k";
             this.kBox.Size = new System.Drawing.Size(224, 23);
@@ -139,7 +143,7 @@
             // 
             // aBox
             // 
-            this.aBox.Location = new System.Drawing.Point(12, 216);
+            this.aBox.Location = new System.Drawing.Point(12, 245);
             this.aBox.Name = "aBox";
             this.aBox.PlaceholderText = "a";
             this.aBox.Size = new System.Drawing.Size(224, 23);
@@ -147,17 +151,59 @@
             // 
             // bBox
             // 
-            this.bBox.Location = new System.Drawing.Point(12, 245);
+            this.bBox.Location = new System.Drawing.Point(12, 274);
             this.bBox.Name = "bBox";
             this.bBox.PlaceholderText = "b";
             this.bBox.Size = new System.Drawing.Size(224, 23);
             this.bBox.TabIndex = 48;
             // 
+            // RSA_DSA_btn
+            // 
+            this.RSA_DSA_btn.BackColor = System.Drawing.SystemColors.Control;
+            this.RSA_DSA_btn.Location = new System.Drawing.Point(242, 48);
+            this.RSA_DSA_btn.Name = "RSA_DSA_btn";
+            this.RSA_DSA_btn.Size = new System.Drawing.Size(80, 46);
+            this.RSA_DSA_btn.TabIndex = 49;
+            this.RSA_DSA_btn.Text = "RSA ЭЦП";
+            this.RSA_DSA_btn.UseVisualStyleBackColor = false;
+            this.RSA_DSA_btn.Click += new System.EventHandler(this.RSA_DSA_btn_Click);
+            // 
+            // qBox
+            // 
+            this.qBox.Enabled = false;
+            this.qBox.Location = new System.Drawing.Point(242, 100);
+            this.qBox.Name = "qBox";
+            this.qBox.PlaceholderText = "q";
+            this.qBox.Size = new System.Drawing.Size(224, 23);
+            this.qBox.TabIndex = 50;
+            // 
+            // eBox
+            // 
+            this.eBox.Enabled = false;
+            this.eBox.Location = new System.Drawing.Point(242, 129);
+            this.eBox.Name = "eBox";
+            this.eBox.PlaceholderText = "e";
+            this.eBox.Size = new System.Drawing.Size(224, 23);
+            this.eBox.TabIndex = 51;
+            // 
+            // signBox
+            // 
+            this.signBox.Enabled = false;
+            this.signBox.Location = new System.Drawing.Point(242, 158);
+            this.signBox.Name = "signBox";
+            this.signBox.PlaceholderText = "Sign";
+            this.signBox.Size = new System.Drawing.Size(224, 23);
+            this.signBox.TabIndex = 52;
+            // 
             // Lab9
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1344, 639);
+            this.ClientSize = new System.Drawing.Size(1284, 639);
+            this.Controls.Add(this.signBox);
+            this.Controls.Add(this.eBox);
+            this.Controls.Add(this.qBox);
+            this.Controls.Add(this.RSA_DSA_btn);
             this.Controls.Add(this.bBox);
             this.Controls.Add(this.aBox);
             this.Controls.Add(this.kBox);
@@ -191,5 +237,9 @@
         private TextBox kBox;
         private TextBox aBox;
         private TextBox bBox;
+        private Button RSA_DSA_btn;
+        private TextBox qBox;
+        private TextBox eBox;
+        private TextBox signBox;
     }
 }

@@ -2,8 +2,8 @@ namespace LabCrypt
 {
     internal static class Program
     {
-        public static string InputText = "";
-        public static string OutputText = "";
+        public static string InputText { get; set; } = "";
+        public static string OutputText { get; set; } = "";
         public static List<Form> Forms = new(20);
 
         /// <summary>
@@ -17,8 +17,10 @@ namespace LabCrypt
             Application.Run(Forms[0]);
         }
 
-        public static void ApplicationExit(object sender, EventArgs e)
+        public static void ApplicationExit(object? sender, EventArgs e)
         {
+            if (sender == null) return;
+
             foreach (Form form in Forms)
             {
                 if (form == sender) continue;
@@ -50,6 +52,6 @@ namespace LabCrypt
 
     public interface IMyForm
     {
-        void UpdateForm();       
+        void UpdateForm();
     }
 }

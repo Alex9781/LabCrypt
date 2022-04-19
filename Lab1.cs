@@ -1,5 +1,4 @@
-﻿#pragma warning disable CS8622 
-namespace LabCrypt
+﻿namespace LabCrypt
 {
     public partial class Lab1 : Form, IMyForm
     {
@@ -11,8 +10,6 @@ namespace LabCrypt
         }
 
         private EncMethod encMethod = EncMethod.Atbash;
-
-        private readonly string alph = "абвгдежзийклмнопрстуфхцчшщъыьэюя—,?.";
 
         public Lab1()
         {
@@ -28,14 +25,13 @@ namespace LabCrypt
 
         public void UpdateForm()
         {
-            this.InputTextBox.Text = Program.InputText;
+            this.InputTextBox.Text = Program.InputText.ToLower();
             this.OutputTextBox.Text = Program.OutputText;
         }
 
         private void InputTextBox_TextChanged(object sender, EventArgs e)
         {
-            this.InputTextBox.Text = Program.InputText;
-            this.OutputTextBox.Text = Program.OutputText;
+            Program.InputText = this.InputTextBox.Text;
         }
 
         private void MainPage_btn_Click(object sender, EventArgs e)
@@ -77,9 +73,18 @@ namespace LabCrypt
         {
             Program.OutputText = "";
 
-            if (encMethod == EncMethod.Atbash) AtbashEncrypt();
-            else if (encMethod == EncMethod.Caesar) CaesarEncrypt();
-            else PolybiusEncrypt();
+            switch (encMethod)
+            {
+                case EncMethod.Atbash:
+                    AtbashEncrypt();
+                    break;
+                case EncMethod.Caesar:
+                    CaesarEncrypt();
+                    break;
+                case EncMethod.Polybius:
+                    PolybiusEncrypt();
+                    break;
+            }
 
             this.OutputTextBox.Text = Program.OutputText;
         }
@@ -88,106 +93,102 @@ namespace LabCrypt
         {
             Program.OutputText = "";
 
-            if (encMethod == EncMethod.Atbash) AtbashDecrypt();
-            else if (encMethod == EncMethod.Caesar) CaesarDecrypt();
-            else PolybiusDecrypt();
+            switch (encMethod)
+            {
+                case EncMethod.Atbash:
+                    AtbashDecrypt();
+                    break;
+                case EncMethod.Caesar:
+                    CaesarDecrypt();
+                    break;
+                case EncMethod.Polybius:
+                    PolybiusDecrypt();
+                    break;
+            }
 
             this.OutputTextBox.Text = Program.OutputText;
         }
 
         private void AtbashEncrypt()
         {
-            foreach (char c in Program.InputText.ToLower())
+            AtbashCipher atbashCipher = new();
+
+            ICipher.InputArgs inputArgs = new()
             {
-                if (!alph.Contains(c))
-                {
-                    Program.OutputText += c;
-                    continue;
-                }
-                Program.OutputText += alph[alph.Length - 1 - alph.IndexOf(c)];
-            }
+                inputText = Program.InputText.ToLower(),
+                isAlphFull = this.Is_Alph_Full_CheckBox.Checked,
+            };
+
+            Program.OutputText = atbashCipher.Encrypt(inputArgs);
+
         }
 
         private void CaesarEncrypt()
         {
-            if (!Int32.TryParse(this.keyBox.Text, out int key))
-            {
-                return;
-            }
+            CaesarCipher caesarCipher = new();
 
-            foreach (char c in Program.InputText.ToLower())
+            ICipher.InputArgs inputArgs = new()
             {
-                if (!alph.Contains(c))
-                {
-                    Program.OutputText += c;
-                    continue;
-                }
-                Program.OutputText += alph[(alph.IndexOf(c) + key) % alph.Length];
-            }
+                inputText = Program.InputText.ToLower(),
+                isAlphFull = this.Is_Alph_Full_CheckBox.Checked,
+                key = this.keyBox.Text,
+            };
+
+            Program.OutputText = caesarCipher.Encrypt(inputArgs);
+
         }
 
         private void PolybiusEncrypt()
         {
-            foreach (char c in Program.InputText.ToLower())
+            PolybiusCipher polybiusCipher = new();
+
+            ICipher.InputArgs inputArgs = new()
             {
-                int letter = alph.IndexOf(c);
-                Program.OutputText += (letter / 6 + 1).ToString() + (letter % 6 + 1).ToString() + " ";
-            }
+                inputText = Program.InputText.ToLower(),
+                isAlphFull = this.Is_Alph_Full_CheckBox.Checked,
+            };
+
+            Program.OutputText = polybiusCipher.Encrypt(inputArgs);
         }
 
         private void AtbashDecrypt()
         {
-            foreach (char c in Program.InputText.ToLower())
-            {
-                if (!alph.Contains(c))
-                {
-                    Program.OutputText += c;
-                    continue;
-                }
+            AtbashCipher atbashCipher = new();
 
-                Program.OutputText += alph[alph.Length - 1 - alph.IndexOf(c)];
-            }
+            ICipher.InputArgs inputArgs = new()
+            {
+                inputText = Program.InputText.ToLower(),
+                isAlphFull = this.Is_Alph_Full_CheckBox.Checked,
+            };
+
+            Program.OutputText = atbashCipher.Encrypt(inputArgs);
         }
 
         private void CaesarDecrypt()
         {
-            if (!Int32.TryParse(this.keyBox.Text, out int key))
-            {
-                return;
-            }
+            CaesarCipher caesarCipher = new();
 
-            foreach (char c in Program.InputText.ToLower())
+            ICipher.InputArgs inputArgs = new()
             {
-                if (!alph.Contains(c))
-                {
-                    Program.OutputText += c;
-                    continue;
-                }
+                inputText = Program.InputText.ToLower(),
+                isAlphFull = this.Is_Alph_Full_CheckBox.Checked,
+                key = this.keyBox.Text,
+            };
 
-                Program.OutputText += alph[(alph.IndexOf(c) - key + alph.Length) % alph.Length];
-            }
+            Program.OutputText = caesarCipher.Decrypt(inputArgs);
         }
 
         private void PolybiusDecrypt()
         {
-            string[] openCopy = Program.InputText.ToLower().Split(" ");
-            int[] openCopyInt = new int[openCopy.Length];
+            PolybiusCipher polybiusCipher = new();
 
-            for (int i = 0; i < openCopy.Length - 1; i++)
+            ICipher.InputArgs inputArgs = new()
             {
-                _ = int.TryParse(openCopy[i], out openCopyInt[i]);
-            }
+                inputText = Program.InputText.ToLower(),
+                isAlphFull = this.Is_Alph_Full_CheckBox.Checked,
+            };
 
-            foreach (int c in openCopyInt)
-            {
-                if (c == 0) continue;
-                if ((c / 10 * 6 - 1) - (6 - (c % 10)) == -1)
-                {
-                    Program.OutputText += ' ';
-                    continue;
-                }
-                Program.OutputText += alph[(c / 10 * 6 - 1) - (6 - (c % 10))];
-            }
+            Program.OutputText = polybiusCipher.Decrypt(inputArgs);
         }
     }
 }
