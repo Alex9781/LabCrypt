@@ -2,16 +2,9 @@
 
 namespace LabCrypt
 {
-    public partial class Lab10 : Form, IMyForm
+    public partial class Lab11 : Form, IMyForm
     {
-        public enum DSA
-        {
-            GOST94,
-            GOST12
-        }
-        private DSA SignMethod = DSA.GOST94;
-
-        public Lab10()
+        public Lab11()
         {
             this.WindowState = FormWindowState.Maximized;
             Program.Forms.Add(this);
@@ -41,13 +34,10 @@ namespace LabCrypt
             Program.InputText = this.InputTextBox.Text;
         }
 
-        private void GOST94_ecp_btn_Click(object sender, EventArgs e)
+        private void Exchange_btn_Click(object sender, EventArgs e)
         {
             Program.OutputText = "";
-        }
 
-        private void Sign_btn_Click(object sender, EventArgs e)
-        {
             string input = Program.InputText;
             string formatedInput = "";
 
@@ -58,16 +48,12 @@ namespace LabCrypt
             }
 
             string strCommandParameters =
-                $"-u C:/Users/alexz/Desktop/Univer/2.2/Крипта/LabCrypt/Py/gost94_dsa.py " +
-                $"{this.pBox.Text} " +
-                $"{this.qBox.Text} " +
+                $"-u C:/Users/alexz/Desktop/Univer/2.2/Крипта/LabCrypt/Py/dh.py " +
+                $"{this.nBox.Text} " +
                 $"{this.aBox.Text} " +
-                $"{this.xBox.Text} " +
+                $"{this.aBox.Text} " +
                 $"{this.kBox.Text} " +
-                $"{this.rBox.Text} " +
-                $"{this.sBox.Text} " +
-                "1 " +
-                $"{formatedInput}";
+                $"{this.ybBox.Text} ";
 
             var process = new Process
             {
@@ -89,35 +75,13 @@ namespace LabCrypt
             process.BeginErrorReadLine();
             process.BeginOutputReadLine();
             process.WaitForExit();
-            Console.Read();
 
             this.OutputTextBox.Text = Program.OutputText;
-
-            //GOST94 gost94 = new();
-
-            //IDSA.InputArgs inputArgs = new()
-            //{
-            //    inputText = this.InputTextBox.Text,
-            //    p = this.pBox.Text,
-            //    q = this.qBox.Text,
-            //    a = this.aBox.Text,
-            //    x = this.xBox.Text,
-            //    k = this.kBox.Text,
-            //    r = this.rBox.Text,
-            //    s = this.sBox.Text,
-            //};
-
-            //Program.OutputText = gost94.Sign(inputArgs);
-        }
-
-        private void Check_btn_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void Process_OutputDataReceived(object sender, DataReceivedEventArgs e)
         {
-            Program.OutputText += e.Data + "\n\r";
+            Program.OutputText += e.Data + " \n\r ";
         }
     }
 }
