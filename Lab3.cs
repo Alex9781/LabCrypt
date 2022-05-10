@@ -1,4 +1,6 @@
-﻿namespace LabCrypt
+﻿using System.Diagnostics;
+
+namespace LabCrypt
 {
     public partial class Lab3 : Form, IMyForm
     {
@@ -106,17 +108,44 @@
 
         private void PlayfairEncrypt()
         {
-            PlayfairCipher playfairCipher = new();
+            string input = Program.InputText.ToLower();
+            string formatedInput = "";
 
-            ICipher.InputArgs inputArgs = new()
+            int isAlphFull = this.Is_Alph_Full_CheckBox.Checked ? 1 : 0;
+
+            foreach (char c in input)
             {
-                inputText = Program.InputText.ToLower(),
-                key = this.keyBox.Text,
-                isAlphFull = this.Is_Alph_Full_CheckBox.Checked,
+                if (c == ' ' || c == '\n' || c == '\r') continue;
+                formatedInput += c;
+            }
+
+            string strCommandParameters =
+                $"-u C:/Users/alexz/Desktop/Univer/2.2/Крипта/LabCrypt/Py/playfair.py " +
+                $"{isAlphFull} " +
+                $"1 " +
+                $"{this.keyBox.Text} " +
+                $"{formatedInput}";
+
+            var process = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = "C:/Users/alexz/AppData/Local/Programs/Python/Python310/python.exe",
+                    Arguments = strCommandParameters,
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    CreateNoWindow = true
+                },
+                EnableRaisingEvents = true
             };
+            process.OutputDataReceived += Process_OutputDataReceived;
+            process.ErrorDataReceived += Process_OutputDataReceived;
 
-            Program.OutputText = playfairCipher.Encrypt(inputArgs);
-
+            process.Start();
+            process.BeginErrorReadLine();
+            process.BeginOutputReadLine();
+            process.WaitForExit();
         }
 
         private void MatrixDecrypt()
@@ -135,16 +164,51 @@
 
         private void PlayfairDecrypt()
         {
-            PlayfairCipher playfairCipher = new();
+            string input = Program.InputText.ToLower();
+            string formatedInput = "";
 
-            ICipher.InputArgs inputArgs = new()
+            int isAlphFull = this.Is_Alph_Full_CheckBox.Checked ? 1 : 0;
+
+            foreach (char c in input)
             {
-                inputText = Program.InputText.ToLower(),
-                key = this.keyBox.Text,
-                isAlphFull = this.Is_Alph_Full_CheckBox.Checked,
-            };
+                if (c == ' ' || c == '\n' || c == '\r') continue;
+                formatedInput += c;
+            }
 
-            Program.OutputText = playfairCipher.Decrypt(inputArgs);
+            string strCommandParameters =
+                $"-u C:/Users/alexz/Desktop/Univer/2.2/Крипта/LabCrypt/Py/playfair.py " +
+                $"{isAlphFull} " +
+                $"0 " +
+                $"{this.keyBox.Text} " +
+                $"{formatedInput}";
+
+            var process = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = "C:/Users/alexz/AppData/Local/Programs/Python/Python310/python.exe",
+                    Arguments = strCommandParameters,
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    CreateNoWindow = true
+                },
+                EnableRaisingEvents = true
+            };
+            process.OutputDataReceived += Process_OutputDataReceived;
+            process.ErrorDataReceived += Process_OutputDataReceived;
+
+            process.Start();
+            process.BeginErrorReadLine();
+            process.BeginOutputReadLine();
+            process.WaitForExit();
+            Console.Read();
+            this.OutputTextBox.Text = Program.OutputText;
+        }
+
+        private void Process_OutputDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            Program.OutputText += e.Data + "\n\r";
         }
     }
 }

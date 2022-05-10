@@ -171,10 +171,19 @@ namespace LabCrypt
 
         private void A51Decrypt()
         {
+            string input = Program.InputText.ToLower();
+            string formatedInput = "";
+
+            foreach (char c in input)
+            {
+                if (c == ' ' || c == '\n' || c == '\r') continue;
+                formatedInput += c;
+            }
+
             string strCommandParameters = $"-u C:/Users/alexz/Desktop/Univer/2.2/Крипта/LabCrypt/Py/a51.py " +
                 $"{this.keyBox.Text} " +
                 $"{this.ivBox.Text} 0 " +
-                $"{Program.InputText}";
+                $"{formatedInput}";
 
             var process = new Process
             {
@@ -231,7 +240,7 @@ namespace LabCrypt
 
         private void Process_OutputDataReceived(object sender, DataReceivedEventArgs e)
         {
-            Program.OutputText += e.Data;
+            Program.OutputText += e.Data + "\n\r";
         }
     }
 }

@@ -75,13 +75,14 @@ namespace LabCrypt
             process.BeginErrorReadLine();
             process.BeginOutputReadLine();
             process.WaitForExit();
+            Console.Read();
 
             this.OutputTextBox.Text = Program.OutputText;
         }
 
         private void Process_OutputDataReceived(object sender, DataReceivedEventArgs e)
         {
-            Program.OutputText += e.Data + " \n\r ";
+            Program.OutputText += e.Data + "\n\r";
         }
     }
 }
