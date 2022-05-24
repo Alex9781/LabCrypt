@@ -1,5 +1,6 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
+using System.Diagnostics;
 
 namespace LabCrypt
 {
@@ -117,111 +118,189 @@ namespace LabCrypt
             this.OutputTextBox.Text = Program.OutputText;
         }
 
+        //private void VerticalEncrypt()
+        //{
+        //    string key = this.keyBox.Text;
+
+        //    List<char> sortedKey = key.ToList<char>();
+        //    sortedKey.Sort();
+
+        //    string input = Program.InputText.ToLower();
+        //    int cols = key.Length, rows = (int)Math.Ceiling(input.Length / (float)cols);
+
+        //    List<char[]> matr = new();
+        //    List<char[]> outputMatr = new();
+        //    for (int i = 0; i < cols; i++)
+        //    {
+        //        matr.Add(new char[rows]);
+        //        outputMatr.Add(new char[rows]);
+        //    }
+        //    int[] arrKey = new int[cols];
+
+        //    for (int i = 0; i < arrKey.Length; i++)
+        //    {
+        //        arrKey[i] = sortedKey.IndexOf(key[i]);
+        //        sortedKey[sortedKey.IndexOf(key[i])] = ' ';
+        //    }
+
+        //    int k = 0;
+        //    for (int j = 0; j < matr[0].Length; j++)
+        //    {
+        //        for (int i = 0; i < matr.Count; i++)
+        //        {
+        //            if (k == input.Length) break;
+        //            matr[i][j] = input[k];
+        //            k++;
+        //        }
+        //    }
+
+        //    for (int i = 0; i < matr.Count; i++)
+        //    {
+        //        outputMatr[i] = matr[arrKey[i]];
+        //    }
+
+        //    for (int j = 0; j < outputMatr[0].Length; j++)
+        //    {
+        //        for (int i = 0; i < matr.Count; i++)
+        //        {
+        //            if (outputMatr[i][j] == '\0') continue;
+        //            Program.OutputText += outputMatr[i][j];
+        //        }
+        //    }
+        //}
+
+        //private void CardanEncrypt()
+        //{
+        //    string input = Program.InputText.ToLower();
+        //    while (input.Length % 60 != 0) input += alph[new Random().Next(alph.Length)];
+        //    string[] chunks = new string[input.Length / 60];
+        //    for (int i = 0; i < chunks.Length; i++)
+        //        chunks[i] = input.Substring(i * 60, 60);
+        //    char[,] key = new char[6, 10];
+        //    int k = 0;
+        //    for (int i = 0; i < 6; i++)
+        //    {
+        //        for (int j = 0; j < 10; j++)
+        //        {
+        //            key[i, j] = this.keyBox.Text[k];
+        //            k++;
+        //        }
+        //    }
+        //    for (int o = 0; o < chunks.Length; o++)
+        //    {
+        //        int axis = 1, prev = 0;
+        //        char[,] output = new char[6, 10];
+
+        //        for (int y = 0; y < 4; y++)
+        //        {
+        //            for (int i = 0; i < key.GetLength(0); i++)
+        //            {
+        //                for (int j = 0; j < key.GetLength(1); j++)
+        //                {
+        //                    if (key[i, j] == '1')
+        //                    {
+        //                        if (prev >= chunks[o].Length)
+        //                        {
+        //                            output[i, j] = alph[new Random().Next(alph.Length)];
+        //                        }
+        //                        else
+        //                        {
+        //                            output[i, j] = chunks[o][prev];
+        //                            prev++;
+        //                        }
+        //                    }
+        //                }
+        //            }
+
+        //            if (axis == 1) key = ReverseArray(key);
+        //            else key = ReverseColumnArray(key);
+        //            axis = (axis + 1) % 2;
+
+        //        }
+
+        //        foreach (char c in output)
+        //        { 
+        //            Program.OutputText += c;
+        //        }
+        //    }
+        //}
+
         private void VerticalEncrypt()
         {
-            string key = this.keyBox.Text;
-
-            List<char> sortedKey = key.ToList<char>();
-            sortedKey.Sort();
-
             string input = Program.InputText.ToLower();
-            int cols = key.Length, rows = (int)Math.Ceiling(input.Length / (float)cols);
+            string formatedInput = "";
 
-            List<char[]> matr = new();
-            List<char[]> outputMatr = new();
-            for (int i = 0; i < cols; i++)
+            foreach (char c in input)
             {
-                matr.Add(new char[rows]);
-                outputMatr.Add(new char[rows]);
-            }
-            int[] arrKey = new int[cols];
-
-            for (int i = 0; i < arrKey.Length; i++)
-            {
-                arrKey[i] = sortedKey.IndexOf(key[i]);
-                sortedKey[sortedKey.IndexOf(key[i])] = ' ';
+                if (c == ' ' || c == '\n' || c == '\r') continue;
+                formatedInput += c;
             }
 
-            int k = 0;
-            for (int j = 0; j < matr[0].Length; j++)
+            string strCommandParameters =
+                $"-u C:/Users/alexz/Desktop/Univer/2.2/Крипта/LabCrypt/Py/vertical.py " +
+                $"{this.keyBox.Text} " +
+                "1 " +
+                $"{formatedInput}";
+
+            var process = new Process
             {
-                for (int i = 0; i < matr.Count; i++)
+                StartInfo = new ProcessStartInfo
                 {
-                    if (k == input.Length) break;
-                    matr[i][j] = input[k];
-                    k++;
-                }
-            }
+                    FileName = "C:/Users/alexz/AppData/Local/Programs/Python/Python310/python.exe",
+                    Arguments = strCommandParameters,
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    CreateNoWindow = true
+                },
+                EnableRaisingEvents = true
+            };
+            process.OutputDataReceived += Process_OutputDataReceived;
+            process.ErrorDataReceived += Process_OutputDataReceived;
 
-            for (int i = 0; i < matr.Count; i++)
-            {
-                outputMatr[i] = matr[arrKey[i]];
-            }
-
-            for (int j = 0; j < outputMatr[0].Length; j++)
-            {
-                for (int i = 0; i < matr.Count; i++)
-                {
-                    if (outputMatr[i][j] == '\0') continue;
-                    Program.OutputText += outputMatr[i][j];
-                }
-            }
+            process.Start();
+            process.BeginErrorReadLine();
+            process.BeginOutputReadLine();
+            process.WaitForExit();
         }
 
         private void CardanEncrypt()
         {
             string input = Program.InputText.ToLower();
-            while (input.Length % 60 != 0) input += alph[new Random().Next(alph.Length)];
-            string[] chunks = new string[input.Length / 60];
-            for (int i = 0; i < chunks.Length; i++)
-                chunks[i] = input.Substring(i * 60, 60);
-            char[,] key = new char[6, 10];
-            int k = 0;
-            for (int i = 0; i < 6; i++)
+            string formatedInput = "";
+
+            foreach (char c in input)
             {
-                for (int j = 0; j < 10; j++)
-                {
-                    key[i, j] = this.keyBox.Text[k];
-                    k++;
-                }
+                if (c == ' ' || c == '\n' || c == '\r') continue;
+                formatedInput += c;
             }
-            for (int o = 0; o < chunks.Length; o++)
+
+            string strCommandParameters =
+                $"-u C:/Users/alexz/Desktop/Univer/2.2/Крипта/LabCrypt/Py/cardano.py " +
+                $"{this.keyBox.Text} " +
+                "1 " +
+                $"{formatedInput}";
+
+            var process = new Process
             {
-                int axis = 1, prev = 0;
-                char[,] output = new char[6, 10];
-
-                for (int y = 0; y < 4; y++)
+                StartInfo = new ProcessStartInfo
                 {
-                    for (int i = 0; i < key.GetLength(0); i++)
-                    {
-                        for (int j = 0; j < key.GetLength(1); j++)
-                        {
-                            if (key[i, j] == '1')
-                            {
-                                if (prev >= chunks[o].Length)
-                                {
-                                    output[i, j] = alph[new Random().Next(alph.Length)];
-                                }
-                                else
-                                {
-                                    output[i, j] = chunks[o][prev];
-                                    prev++;
-                                }
-                            }
-                        }
-                    }
+                    FileName = "C:/Users/alexz/AppData/Local/Programs/Python/Python310/python.exe",
+                    Arguments = strCommandParameters,
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    CreateNoWindow = true
+                },
+                EnableRaisingEvents = true
+            };
+            process.OutputDataReceived += Process_OutputDataReceived;
+            process.ErrorDataReceived += Process_OutputDataReceived;
 
-                    if (axis == 1) key = ReverseArray(key);
-                    else key = ReverseColumnArray(key);
-                    axis = (axis + 1) % 2;
-
-                }
-
-                foreach (char c in output)
-                {
-                    Program.OutputText += c;
-                }
-            }
+            process.Start();
+            process.BeginErrorReadLine();
+            process.BeginOutputReadLine();
+            process.WaitForExit();
         }
 
         private void FeistelEncrypt()
@@ -248,105 +327,183 @@ namespace LabCrypt
             Program.OutputText = Encoding.Unicode.GetString(ret);
         }
 
+        //private void VerticalDecrypt()
+        //{
+        //    string key = this.keyBox.Text;
+
+        //    List<char> sortedKey = key.ToList<char>();
+        //    sortedKey.Sort();
+
+        //    string input = Program.InputText.ToLower();
+        //    int cols = key.Length, rows = (int)Math.Ceiling(input.Length / (float)cols);
+
+        //    List<char[]> matr = new();
+        //    List<char[]> outputMatr = new();
+        //    List<char[]> tempMatr;
+        //    for (int i = 0; i < cols; i++)
+        //    {
+        //        matr.Add(new char[rows]);
+        //        outputMatr.Add(new char[rows]);
+        //    }
+        //    int[] arrKey = new int[cols];
+
+        //    for (int i = 0; i < arrKey.Length; i++)
+        //    {
+        //        arrKey[i] = sortedKey.IndexOf(key[i]);
+        //        sortedKey[sortedKey.IndexOf(key[i])] = ' ';
+        //    }
+
+        //    tempMatr = matr;
+        //    string tempStr = input;
+        //    for (int y = 0; y < (key.Length % 2 != 0 ? key.Length : key.Length - 1); y++)
+        //    {
+        //        int k = 0;
+        //        for (int j = 0; j < matr[0].Length; j++)
+        //        {
+        //            for (int i = 0; i < matr.Count; i++)
+        //            {
+        //                if (k == input.Length) break;
+        //                tempMatr[i][j] = tempStr[k];
+        //                k++;
+        //            }
+        //        }
+
+        //        for (int i = 0; i < matr.Count; i++)
+        //        {
+        //            outputMatr[i] = tempMatr[arrKey[i]];
+        //        }
+
+        //        tempStr = "";
+        //        for (int j = 0; j < outputMatr[0].Length; j++)
+        //        {
+        //            for (int i = 0; i < matr.Count; i++)
+        //            {
+        //                if (outputMatr[i][j] == '\0') continue;
+        //                tempStr += outputMatr[i][j];
+        //            }
+        //        }
+        //    }
+        //    Program.OutputText = tempStr;
+        //}
+
+        //private void CardanDecrypt()
+        //{
+        //    string input = Program.InputText.ToLower();
+        //    char[,] key = new char[6, 10];
+        //    string[] chunks = new string[input.Length / 60];
+        //    for (int i = 0; i < chunks.Length; i++)
+        //        chunks[i] = input.Substring(i * 60, 60);
+
+        //    int k = 0;
+        //    for (int i = 0; i < 6; i++)
+        //    {
+        //        for (int j = 0; j < 10; j++)
+        //        {
+        //            key[i, j] = this.keyBox.Text[k];
+        //            k++;
+        //        }
+        //    }
+
+        //    foreach (string chunk in chunks)
+        //    {
+
+        //        int axis = 1;
+        //        for (int y = 0; y < 4; y++)
+        //        {
+        //            for (int i = 0; i < key.GetLength(0); i++)
+        //            {
+        //                for (int j = 0; j < key.GetLength(1); j++)
+        //                {
+        //                    if (key[i, j] == '1')
+        //                    {
+        //                        Program.OutputText += chunk[i * key.GetLength(1) + j];
+        //                    }
+        //                }
+        //            }
+
+        //            if (axis == 1) key = ReverseArray(key);
+        //            else key = ReverseColumnArray(key);
+        //            axis = (axis + 1) % 2;
+        //        }
+        //    }
+        //}
+
         private void VerticalDecrypt()
         {
-            string key = this.keyBox.Text;
-
-            List<char> sortedKey = key.ToList<char>();
-            sortedKey.Sort();
-
             string input = Program.InputText.ToLower();
-            int cols = key.Length, rows = (int)Math.Ceiling(input.Length / (float)cols);
+            string formatedInput = "";
 
-            List<char[]> matr = new();
-            List<char[]> outputMatr = new();
-            List<char[]> tempMatr;
-            for (int i = 0; i < cols; i++)
+            foreach (char c in input)
             {
-                matr.Add(new char[rows]);
-                outputMatr.Add(new char[rows]);
-            }
-            int[] arrKey = new int[cols];
-
-            for (int i = 0; i < arrKey.Length; i++)
-            {
-                arrKey[i] = sortedKey.IndexOf(key[i]);
-                sortedKey[sortedKey.IndexOf(key[i])] = ' ';
+                if (c == ' ' || c == '\n' || c == '\r') continue;
+                formatedInput += c;
             }
 
-            tempMatr = matr;
-            string tempStr = input;
-            for (int y = 0; y < (key.Length % 2 != 0 ? key.Length : key.Length - 1); y++)
+            string strCommandParameters =
+                $"-u C:/Users/alexz/Desktop/Univer/2.2/Крипта/LabCrypt/Py/vertical.py " +
+                $"{this.keyBox.Text} " +
+                "0 " +
+                $"{formatedInput}";
+
+            var process = new Process
             {
-                int k = 0;
-                for (int j = 0; j < matr[0].Length; j++)
+                StartInfo = new ProcessStartInfo
                 {
-                    for (int i = 0; i < matr.Count; i++)
-                    {
-                        if (k == input.Length) break;
-                        tempMatr[i][j] = tempStr[k];
-                        k++;
-                    }
-                }
+                    FileName = "C:/Users/alexz/AppData/Local/Programs/Python/Python310/python.exe",
+                    Arguments = strCommandParameters,
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    CreateNoWindow = true
+                },
+                EnableRaisingEvents = true
+            };
+            process.OutputDataReceived += Process_OutputDataReceived;
+            process.ErrorDataReceived += Process_OutputDataReceived;
 
-                for (int i = 0; i < matr.Count; i++)
-                {
-                    outputMatr[i] = tempMatr[arrKey[i]];
-                }
-
-                tempStr = "";
-                for (int j = 0; j < outputMatr[0].Length; j++)
-                {
-                    for (int i = 0; i < matr.Count; i++)
-                    {
-                        if (outputMatr[i][j] == '\0') continue;
-                        tempStr += outputMatr[i][j];
-                    }
-                }
-            }
-            Program.OutputText = tempStr;
+            process.Start();
+            process.BeginErrorReadLine();
+            process.BeginOutputReadLine();
+            process.WaitForExit();
         }
 
         private void CardanDecrypt()
         {
             string input = Program.InputText.ToLower();
-            char[,] key = new char[6, 10];
-            string[] chunks = new string[input.Length / 60];
-            for (int i = 0; i < chunks.Length; i++)
-                chunks[i] = input.Substring(i * 60, 60);
+            string formatedInput = "";
 
-            int k = 0;
-            for (int i = 0; i < 6; i++)
+            foreach (char c in input)
             {
-                for (int j = 0; j < 10; j++)
-                {
-                    key[i, j] = this.keyBox.Text[k];
-                    k++;
-                }
+                if (c == ' ' || c == '\n' || c == '\r') continue;
+                formatedInput += c;
             }
 
-            foreach (string chunk in chunks)
+            string strCommandParameters =
+                $"-u C:/Users/alexz/Desktop/Univer/2.2/Крипта/LabCrypt/Py/cardano.py " +
+                $"{this.keyBox.Text} " +
+                "0 " +
+                $"{formatedInput}";
+
+            var process = new Process
             {
-
-                int axis = 1;
-                for (int y = 0; y < 4; y++)
+                StartInfo = new ProcessStartInfo
                 {
-                    for (int i = 0; i < key.GetLength(0); i++)
-                    {
-                        for (int j = 0; j < key.GetLength(1); j++)
-                        {
-                            if (key[i, j] == '1')
-                            {
-                                Program.OutputText += chunk[i * key.GetLength(1) + j];
-                            }
-                        }
-                    }
+                    FileName = "C:/Users/alexz/AppData/Local/Programs/Python/Python310/python.exe",
+                    Arguments = strCommandParameters,
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    CreateNoWindow = true
+                },
+                EnableRaisingEvents = true
+            };
+            process.OutputDataReceived += Process_OutputDataReceived;
+            process.ErrorDataReceived += Process_OutputDataReceived;
 
-                    if (axis == 1) key = ReverseArray(key);
-                    else key = ReverseColumnArray(key);
-                    axis = (axis + 1) % 2;
-                }
-            }
+            process.Start();
+            process.BeginErrorReadLine();
+            process.BeginOutputReadLine();
+            process.WaitForExit();
         }
 
         private void FeistelDecrypt()
@@ -409,6 +566,11 @@ namespace LabCrypt
         {
             (arr[end, j], arr[start, i]) = (arr[start, i], arr[end, j]);
             return arr;
+        }
+
+        private void Process_OutputDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            Program.OutputText += e.Data;
         }
     }
 }

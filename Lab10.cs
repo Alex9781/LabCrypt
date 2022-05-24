@@ -43,10 +43,38 @@ namespace LabCrypt
 
         private void GOST94_ecp_btn_Click(object sender, EventArgs e)
         {
-            Program.OutputText = "";
+            SignMethod = DSA.GOST94;
+
+            this.GOST94_ecp_btn.BackColor = Color.Turquoise;
+            this.GOST12_ecp_btn.BackColor = Color.Transparent;
+        }
+
+        private void GOST12_ecp_btn_Click(object sender, EventArgs e)
+        {
+            SignMethod = DSA.GOST12;
+
+            this.GOST94_ecp_btn.BackColor = Color.Transparent;
+            this.GOST12_ecp_btn.BackColor = Color.Turquoise;
         }
 
         private void Sign_btn_Click(object sender, EventArgs e)
+        {
+            Program.OutputText = "";
+
+            switch (SignMethod)
+            {
+                case DSA.GOST94:
+                    GOST94Sign();
+                    break;
+                case DSA.GOST12:
+                    GOST12Sign();
+                    break;
+            }
+
+            this.OutputTextBox.Text = Program.OutputText;
+        }
+
+        private void GOST94Sign()
         {
             string input = Program.InputText;
             string formatedInput = "";
@@ -89,30 +117,51 @@ namespace LabCrypt
             process.BeginErrorReadLine();
             process.BeginOutputReadLine();
             process.WaitForExit();
-            Console.Read();
-
-            this.OutputTextBox.Text = Program.OutputText;
-
-            //GOST94 gost94 = new();
-
-            //IDSA.InputArgs inputArgs = new()
-            //{
-            //    inputText = this.InputTextBox.Text,
-            //    p = this.pBox.Text,
-            //    q = this.qBox.Text,
-            //    a = this.aBox.Text,
-            //    x = this.xBox.Text,
-            //    k = this.kBox.Text,
-            //    r = this.rBox.Text,
-            //    s = this.sBox.Text,
-            //};
-
-            //Program.OutputText = gost94.Sign(inputArgs);
         }
 
-        private void Check_btn_Click(object sender, EventArgs e)
+        private void GOST12Sign()
         {
+            string input = Program.InputText;
+            string formatedInput = "";
 
+            foreach (char c in input)
+            {
+                if (c == ' ' || c == '\n' || c == '\r') continue;
+                formatedInput += c;
+            }
+
+            string strCommandParameters =
+                $"-u C:/Users/alexz/Desktop/Univer/2.2/Крипта/LabCrypt/Py/gost12_dsa.py " +
+                $"{this.a2_box.Text} " + //1
+                $"{this.b2_box.Text} " + //2
+                $"{this.p2_box.Text} " + //3
+                $"{this.xu2_box.Text} " + //4
+                $"{this.x2_box.Text} " + //5
+                $"{this.y2_box.Text} " + //6
+                $"{this.k2_box.Text} " + //7
+                "1 " + //8
+                $"{formatedInput}"; //9
+
+            var process = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = "C:/Users/alexz/AppData/Local/Programs/Python/Python310/python.exe",
+                    Arguments = strCommandParameters,
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    CreateNoWindow = true
+                },
+                EnableRaisingEvents = true
+            };
+            process.OutputDataReceived += Process_OutputDataReceived;
+            process.ErrorDataReceived += Process_OutputDataReceived;
+
+            process.Start();
+            process.BeginErrorReadLine();
+            process.BeginOutputReadLine();
+            process.WaitForExit();
         }
 
         private void Process_OutputDataReceived(object sender, DataReceivedEventArgs e)
