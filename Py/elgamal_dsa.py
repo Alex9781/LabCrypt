@@ -70,8 +70,8 @@ def gencp(orig, p, g, x, k):
         print('\nОшибка. p - простое число.\n')
         exit()
 
-    hm = hash(orig, p)
-    #hm = int(orig)
+    #hm = hash(orig, p)
+    hm = int(orig)
     if hm <= 1 or hm >= p-1:
         print('\nОшибка. 1 < hash < p-1 .\n')
         exit()
@@ -103,8 +103,8 @@ def checkcp(orig, p, g, x, k, a, b):
         print('\nОшибка. p - простое число.\n')
         exit()
 
-    hm = hash(orig, p)
-    #hm = int(orig)
+    #hm = hash(orig, p)
+    hm = int(orig)
     if hm <= 1 or hm >= p-1:
         print('\nОшибка. 1 < hash < p-1 .\n')
         exit()

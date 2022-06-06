@@ -10,7 +10,7 @@ def elgamal(p, g, x, isEncode, message_):
     #message = input("Сообщение: ").upper()
     message = message_
 
-    alphabet = 'абвгдежзийклмнопрстуфхцчшщъыьэюя#,.!?:;{ }[]\'\"-'
+    alphabet = 'абвгдежзийклмнопрстуфхцчшщъыьэюя#,.!?:;{ }[]\'\"-—'
 
     # Вводим ключ P
     P = int(p)
@@ -101,4 +101,4 @@ x = sys.argv[3]
 isEncode = sys.argv[4]
 message = sys.argv[5]
 
-elgamal(p, g, x, isEncode, message)
+elgamal(p, g, x, isEncode, message.lower())

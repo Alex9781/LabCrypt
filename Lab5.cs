@@ -123,13 +123,14 @@ namespace LabCrypt
             List<int> key = new List<int>();
             int a = int.Parse(this.aBox.Text);
             int c = int.Parse(this.cBox.Text);
+            int[] output = input;
 
             for (int i = 0; i < input.Length; i++)
             {
                 if (i == 0) key.Add(int.Parse(this.TBox.Text));
                 else key.Add((a * key[i - 1] + c) % alph.Length);
-                input[i] = input[i] ^ key[i];
-                Program.OutputText += $"{input[i]} ";
+                output[i] = input[i] ^ key[i];
+                Program.OutputText += $"{output[i]} ";
             }
         }
 

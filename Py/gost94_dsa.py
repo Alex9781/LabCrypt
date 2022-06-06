@@ -91,7 +91,7 @@ def gencp(orig, p, q, a, x, k):
     print("\nСекретный ключ x:", x)
 
     #hm = hash(orig, p, q)
-    #hm = 4
+    hm = int(orig)
     r = (a**k % p) % q
     if r == 0:
         print("Ошибка. r=0. Смените k.")
@@ -125,12 +125,11 @@ def checkcp(orig, p, q, a, x, k, r, s):
     print("\nОткрытые ключи:\np: ", p, "\nq: ", q, "\na: ", a)
     print("\nСекретный ключ x:", x)
 
-    hm = hash(orig, p, q)
-
     if r == 0:
         print("Ошибка. r=0. Смените k.")
 
-    hm = hash(orig, p, q)
+    #hm = hash(orig, p, q)
+    hm = int(orig)
 
     v = (hm**(q-2)) % q
     z1 = (s * v) % q

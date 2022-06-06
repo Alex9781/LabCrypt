@@ -22,9 +22,9 @@ alp = ['а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', '
 
 
 def encryptmessage(orig, key):
-
     (ma, mb) = generate_jail(len(orig))
     print("Размер матрицы: ", ma, "x", mb)
+    print()
     q = 0
     for i in range(ma):
         for j in range(mb):
@@ -112,6 +112,7 @@ def encryptmessage(orig, key):
             exit()
         num = [i-1 for i in keykey]
         print(num, "\n")
+        print()
 
     ost = len(orig) % (mb*(ma-1))
 
@@ -137,6 +138,7 @@ def encryptmessage(orig, key):
                 for f in range(ma-1):
                     enc.append(matrix[f][g])
     print("Зашифрованный текст: ")
+    print()
 
     return "".join(enc)
 
@@ -263,10 +265,6 @@ def decryptmessage(orig, key):
 key = sys.argv[1]
 isEnc = bool(int(sys.argv[2])) 
 message = sys.argv[3]
-
-# key = 'лачугай'
-# message = 'каждаякадкадолжнастоятьнасобственномднищетчк'
-# isEnc = True
 
 if isEnc: print(encryptmessage(message, key))
 else: print(decryptmessage(message, key))

@@ -132,15 +132,15 @@ namespace LabCrypt
 
             string strCommandParameters =
                 $"-u C:/Users/alexz/Desktop/Univer/2.2/Крипта/LabCrypt/Py/gost12_dsa.py " +
-                $"{this.a2_box.Text} " + //1
-                $"{this.b2_box.Text} " + //2
-                $"{this.p2_box.Text} " + //3
-                $"{this.xu2_box.Text} " + //4
-                $"{this.x2_box.Text} " + //5
-                $"{this.y2_box.Text} " + //6
-                $"{this.k2_box.Text} " + //7
-                "1 " + //8
-                $"{formatedInput}"; //9
+                $"{this.a2_box.Text} " +    //1
+                $"{this.b2_box.Text} " +    //2
+                $"{this.p2_box.Text} " +    //3
+                $"{this.xu2_box.Text} " +   //4
+                $"{this.x2_box.Text} " +    //5
+                $"{this.y2_box.Text} " +    //6
+                $"{this.k2_box.Text} " +    //7
+                "1 " +                      //8
+                $"{formatedInput}";         //9
 
             var process = new Process
             {

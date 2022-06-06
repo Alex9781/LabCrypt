@@ -221,11 +221,6 @@ iv = int(sys.argv[2])
 isEncrypt = bool(int(sys.argv[3]))
 inputStr = sys.argv[4]
 
-# key = "случай"
-# iv = 123
-# isEncrypt = 1
-# inputStr = "каждаякадкадолжнастоятьнасобственномднищетчк"
-
 if isEncrypt:
     print(encryptmessage(inputStr, key, iv))
 else:

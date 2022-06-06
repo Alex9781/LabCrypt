@@ -87,6 +87,7 @@ def pleifer_encrypt(text, key):
     text = to_bin(preapre_text(text))
     encrypt = ""
     print(text)
+    print()
     for i in range(len(text)):
         a = text[i][0]
         b = text[i][1]

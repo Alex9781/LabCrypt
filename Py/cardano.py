@@ -136,28 +136,8 @@ elif (len(orig) > m2*n2):
 
 print("\nПереформатированный текст: ", orig, "\n")
 
-# path = "traf.txt"
-# if not osp.exists(path):
-#     print('\nОшибка. Нет файла с трафаретом.\n')
-#     exit()
-# elif osp.getsize(path) == 0:
-#     print('\nОшибка. Файл с трафаретом пуст.\n')
-#     exit()
 jail = np.full((m2, n2), -1)
-# file = open("traf.txt", "r")
-# measure(file, n2, m2)
-
-# rowc = 0
-# colc = 0
-
-# with open("traf.txt", "r") as f:
-#     for line in f.readlines():
-#         cline = line.split()
-#         for k in cline:
-#             jail[rowc][colc] = int(k)
-#             colc += 1
-#         rowc += 1
-#         colc = 0
+      colc = 0
 
 key = sys.argv[1]
 k = 0
@@ -168,36 +148,6 @@ for i in range(m2):
 
 print(jail)
 
-# file.close()
-
-# zeros = 0
-# for j in range(len(jail)):
-#     for i in range(len(jail[j])):
-#         if jail[j][i] == 0:
-#             zeros += 1
-#             if jail[m2-1-j][i] != 1 or jail[j][n2-1-i] != 1 or jail[m2-1-j][n2-1-i] != 1:
-#                 print("Ошибка. В трафарете есть совпадающие отверстия")
-#                 exit()
-#         elif jail[j][i] < 0:
-#             print("Ошибка. Трафарет должен состоять из чисел 0 и 1.")
-#             exit()
-#         elif jail[j][i] > 1:
-#             print("Ошибка. Трафарет должен состоять из чисел 0 и 1.")
-#             exit()
-# if zeros == 0:
-#     print("Ошибка. В трафарете нет отверстий.")
-#     exit()
-
-# print("\nТрафарет (0 - отверстие): ")
-# for i in range(len(jail)):
-#     for j in range(len(jail[i])):
-#         if (j == len(jail[i])-1):
-#             print(jail[i][j], end="\n")
-#         else:
-#             print(jail[i][j], end=" ")
-
-# print(jail)
-# exit()
 ask = bool(int(sys.argv[2])) #input("\nЗашифровать? (д/н): ")
 if ask:
     encrypt()
